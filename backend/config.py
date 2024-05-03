@@ -16,9 +16,9 @@ FLASK_LOGIN_SECRET_KEY = os.environ.get(
 )
 
 FORM_DATA_ENCRYPTION_KEY = os.environ.get(
-    "FORM_DATA_ENCRYPTION_KEY", b"k4PBsjZ3-UZxWdPUgtT2X9bpwFLwomC_iJEjWdtbrcU="
+    "FORM_DATA_ENCRYPTION_KEY"
 )
 
 OPENAI_API_KEY = os.getenv(
-    "OPENAI_API_KEY", "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"
+    "OPENAI_API_KEY"
 )
