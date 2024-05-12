@@ -16,7 +16,7 @@ This project is a full-stack application using Flask and Python for the backend 
 - **Backend:** Flask, Python
 - **Frontend:** Next.js, React, Tailwind CSS, TS
 - **Database:** PostgreSQL, SQLAlchemy
-- **Deployment:** Docker, Vercel
+- **LLMs:** ChatGPT gpt-3.5, Gorq (llama)
 
 ## Getting Started
 
