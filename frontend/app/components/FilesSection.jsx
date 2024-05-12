@@ -12,6 +12,7 @@ const FilesSection = ({
     <h3 className="text-xl font-bold text-cyan-500 mb-4">Previous Files</h3>
     <ul className="text-gray-400 overflow-auto h-auto mb-4">
       {loading && <p>Loading Data...</p>}
+      {uploading && <p>Uploading File...</p>}
       {!loading &&
         files.map((file) => (
           <li
@@ -27,7 +28,7 @@ const FilesSection = ({
           </li>
         ))}
     </ul>
-    <label className="bg-cyan-500 hover:bg-cyan-600 justify-start text-white font-bold py-1 px-6 rounded focus:outline-none focus:shadow-outline transition-colors duration-200">
+    <label className="bg-cyan-500 hover:bg-cyan-600 justify-start text-white font-bold py-1 px-6 rounded focus:outline-none focus:shadow-outline transition-colors duration-200 cursor-pointer">
       + Upload New File
       <input
         type="file"
