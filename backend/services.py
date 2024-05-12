@@ -15,7 +15,8 @@ import openai_services
 from collections import defaultdict
 import pandas as pd
 import textract
-
+import groq_services
+from config import ENABLE_OPENAI_SERVICES
 
 def create_user(email, name, password):
     try:
@@ -209,7 +210,13 @@ def handle_user_query(user_query, file_id, current_user_id):
                 "content": prompt_content,
             }
         ]
-        completion = openai_services.request_completion(messages)
+
+
+        completion = ""
+        if ENABLE_OPENAI_SERVICES:
+            completion = openai_services.request_completion(messages)
+        else:
+            completion = groq_services.request_completion(messages)
 
         log_chat_history(current_user_id, file_id, user_query, completion)
 

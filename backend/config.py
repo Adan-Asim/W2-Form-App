@@ -22,3 +22,8 @@ FORM_DATA_ENCRYPTION_KEY = os.environ.get(
 OPENAI_API_KEY = os.getenv(
     "OPENAI_API_KEY"
 )
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+ENABLE_OPENAI_SERVICES = os.getenv("ENABLE_OPENAI_SERVICES", "False") == "True"
+
