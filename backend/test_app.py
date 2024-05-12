@@ -23,7 +23,11 @@ class TestAPI(unittest.TestCase):
     def test_signup(self):
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Test User", "password": "testpass"},
+            json={
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "testpass",
+            },
         )
         self.assertEqual(response.status_code, 201)
         data = json.loads(response.data)
@@ -32,7 +36,11 @@ class TestAPI(unittest.TestCase):
         # Test duplicate signup
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Another Test User", "password": "testpass2"},
+            json={
+                "email": "test@example.com",
+                "name": "Another Test User",
+                "password": "testpass2",
+            },
         )
         self.assertEqual(response.status_code, 409)
         data = json.loads(response.data)
@@ -41,7 +49,11 @@ class TestAPI(unittest.TestCase):
     def test_login(self):
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Test User", "password": "testpass"},
+            json={
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "testpass",
+            },
         )
         self.assertEqual(response.status_code, 201)
 
@@ -60,12 +72,18 @@ class TestAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 401)
         data = json.loads(response.data)
-        self.assertEqual(data["message"], "Unable to log in, make sure given credentials are correct")
+        self.assertEqual(
+            data["message"], "Unable to log in, make sure given credentials are correct"
+        )
 
     def test_logout(self):
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Test User", "password": "testpass"},
+            json={
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "testpass",
+            },
         )
         self.assertEqual(response.status_code, 201)
 
@@ -86,7 +104,6 @@ class TestAPI(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual(data["message"], "User logout successful")
 
-    
     def test_upload_file(self):
         def create_dummy_pdf(filename):
             from reportlab.lib.pagesizes import letter
@@ -104,7 +121,7 @@ class TestAPI(unittest.TestCase):
                 "Total Income: $50,000",
                 "Taxes Paid: $10,000",
             ]
-            
+
             y_position = 750
             for line in text_content:
                 c.drawString(50, y_position, line)
@@ -114,7 +131,11 @@ class TestAPI(unittest.TestCase):
 
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Test User", "password": "testpass"},
+            json={
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "testpass",
+            },
         )
         self.assertEqual(response.status_code, 201)
 
@@ -139,7 +160,6 @@ class TestAPI(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual(data["message"], "File uploaded and parsed successfully")
 
-
     def test_get_user_chat_history(self):
         def populate_chat_history():
             from model import User, W2Form, ChatHistory
@@ -147,7 +167,11 @@ class TestAPI(unittest.TestCase):
 
             user = User.query.filter_by(email="test@example.com").first()
 
-            w2_form = W2Form(user_id=user.id, filename="test_w2_form.pdf", data={"year": 2024, "total_income": 50000, "taxes_paid": 10000})
+            w2_form = W2Form(
+                user_id=user.id,
+                filename="test_w2_form.pdf",
+                data={"year": 2024, "total_income": 50000, "taxes_paid": 10000},
+            )
             db.session.add(w2_form)
             db.session.commit()
 
@@ -171,12 +195,16 @@ class TestAPI(unittest.TestCase):
             for entry in chat_entries:
                 chat = ChatHistory(**entry)
                 db.session.add(chat)
-            
+
             db.session.commit()
-            
+
         response = self.app.post(
             "/api/user/signup",
-            json={"email": "test@example.com", "name": "Test User", "password": "testpass"},
+            json={
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "testpass",
+            },
         )
         self.assertEqual(response.status_code, 201)
 
@@ -192,7 +220,10 @@ class TestAPI(unittest.TestCase):
         self.assertIn("access_token", data)
         access_token = data["access_token"]
 
-        response = self.app.get("/api/user/chat-history", headers={"Authorization": f"Bearer {access_token}"})
+        response = self.app.get(
+            "/api/user/chat-history",
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
         self.assertEqual(response.status_code, 200)
 
         data = json.loads(response.data)
@@ -205,7 +236,9 @@ class TestAPI(unittest.TestCase):
 
         first_chat = chat_history[0]["chat_history"][0]
         self.assertEqual(first_chat["user_query"], "How much did I earn last year?")
-        self.assertEqual(first_chat["ai_response"], "Your total earnings last year were $50,000.")
+        self.assertEqual(
+            first_chat["ai_response"], "Your total earnings last year were $50,000."
+        )
 
         second_chat = chat_history[0]["chat_history"][1]
         self.assertEqual(second_chat["user_query"], "Show me my tax deductions.")
