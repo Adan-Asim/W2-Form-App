@@ -17,6 +17,7 @@ This project is a full-stack application using Flask and Python for the backend 
 - **Frontend:** Next.js, React, Tailwind CSS, TS
 - **Database:** PostgreSQL, SQLAlchemy
 - **LLMs:** ChatGPT gpt-3.5, Gorq (llama)
+- **OCR and supporting Libraries:** pdf2image, pytesseract, PIL, Werkzeug, cryptography, base64, pandas, textract
 
 ## Getting Started
 
@@ -78,8 +79,6 @@ Contributions are welcome. Please read CONTRIBUTING.md for details on our code o
 ## Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your-project/tags).
 
-## Authors
-- **Adan Asim** - *Initial work* - [GithubProfile](https://github.com/adan-asim)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
