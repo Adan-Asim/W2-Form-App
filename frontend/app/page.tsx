@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Page from "./login/page";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
     <main className="">
-      <Page />
+      <LoginPage />
     </main>
   );
 }

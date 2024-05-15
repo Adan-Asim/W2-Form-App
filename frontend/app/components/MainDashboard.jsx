@@ -53,6 +53,7 @@ const MainDashboard = () => {
           filename: `W2 Form ${item.filename}`,
           fileInfo: `Chat history for W2 Form ${item.w2_form_id}`,
         }));
+        
         setFiles(filesData);
         setConversations(chat_history_by_w2_form);
       }

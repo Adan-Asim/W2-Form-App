@@ -13,7 +13,7 @@ from flask_jwt_extended import (
 import config
 from extensions import db
 
-import validations as validations
+import validations
 import services
 import bcrypt_services as bcrypt
 

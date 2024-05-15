@@ -66,6 +66,8 @@ def handle_file_upload(file, user_id):
         encrypted_text = cryptography_services.encrypt_text(extracted_full_text)
         encoded_base64text = base64.b64encode(encrypted_text).decode("utf-8")
 
+        logging.info(f"Successfully encoded file: {bool(encoded_base64text)}")
+
         w2_form = W2Form(
             user_id=user_id,
             filename=secure_filename(file.filename),
